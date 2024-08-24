@@ -1,0 +1,9 @@
+Name Mangling: C++ uses name mangling to support function overloading, whereas C does not. This means that C++ functions and variables have unique names based on their signature, while C uses plain names. To import C functions or classes into C++, you may need to use extern "C" to prevent name mangling.
+
+
+
+example: 
+
+extern "C" {
+    #include "legacy_c_code.h"
+}

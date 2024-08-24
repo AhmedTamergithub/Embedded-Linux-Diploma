@@ -1,0 +1,62 @@
+In C++, both interface classes and abstract classes are used to define classes that cannot be instantiated on their own and are meant to be subclassed. However, they have different purposes and typical structures:
+1. Abstract Class
+
+    Purpose: An abstract class serves as a base class that can provide both interface and implementation. It can contain a mix of pure virtual functions (which must be overridden by derived classes) and regular member functions with implementations.
+    Structure: An abstract class has at least one pure virtual function. A pure virtual function is declared by assigning 0 to the function declaration.
+
+Example:
+
+cpp
+
+class AbstractClass {
+public:
+    virtual void pureVirtualFunction() = 0;  // Pure virtual function
+    void implementedFunction() {             // Regular function
+        // Implementation code
+    }
+};
+
+    Use Case: Abstract classes are used when you want to provide a common base class that might include some shared implementation for all derived classes, in addition to defining a required interface.
+
+2. Interface Class
+
+    Purpose: An interface class defines a purely abstract interface, meaning it only contains pure virtual functions and no data members or implemented functions. It serves purely to define a contract that derived classes must fulfill.
+    Structure: An interface class consists entirely of pure virtual functions.
+
+Example:
+
+cpp
+
+class InterfaceClass {
+public:
+    virtual void function1() = 0;  // Pure virtual function
+    virtual void function2() = 0;  // Pure virtual function
+    virtual ~InterfaceClass() = default;  // Virtual destructor
+};
+
+    Use Case: Interface classes are used when you want to ensure that derived classes provide specific behaviors, without any implementation or data members in the base class. It's a way to enforce that certain functions are implemented by any subclass.
+
+Key Differences:
+
+    Implementation:
+        Abstract Class: Can have both pure virtual functions (no implementation) and non-pure virtual functions (with implementation).
+        Interface Class: Contains only pure virtual functions with no implementation.
+
+    Purpose:
+        Abstract Class: Used when some common functionality should be shared among derived classes.
+        Interface Class: Used to enforce a strict contract that all derived classes must follow, without providing any implementation.
+
+    Flexibility:
+        Abstract Class: More flexible as it can include shared code.
+        Interface Class: More rigid as it purely defines an interface with no shared code.
+
+
+
+
+
+
+
+
+Also 2 important notes for interface class:
+1-It is not allowed to create instance from interface class
+2-In inherited class of an interface(parent) class , we must implement all pure virtual functions

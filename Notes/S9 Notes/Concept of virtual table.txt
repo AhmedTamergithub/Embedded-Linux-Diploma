@@ -1,0 +1,21 @@
+n C++ polymorphism, a virtual table (vtable) is a mechanism used to support dynamic (or runtime) polymorphism, especially in the context of inheritance.
+Key Concepts:
+
+    Virtual Table (vtable):
+        The vtable is a table of function pointers. Each class that uses virtual functions has its own vtable.
+        The vtable contains pointers to the virtual functions that the class can call.
+
+    Virtual Function:
+        When a class has a virtual function, the compiler creates a vtable for that class.
+        Each object of the class (or derived class) holds a pointer to its class's vtable, known as the vptr.
+
+    How It Works:
+        When a virtual function is called on an object, the compiler uses the object's vptr to look up the correct function in the vtable.
+        This allows the program to determine at runtime which function to invoke, enabling polymorphism.
+
+    Polymorphism:
+        The virtual table allows a base class pointer to call the derived class's overridden function, even though the call was made through the base class interface. This is the essence of runtime polymorphism.
+
+Summary:
+
+The virtual table is a crucial component in C++ that facilitates dynamic polymorphism by mapping function calls to the appropriate overridden functions in derived classes at runtime.

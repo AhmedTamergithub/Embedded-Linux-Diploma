@@ -1,0 +1,39 @@
+Copy Assignment (operator=)
+
+    Purpose: The copy assignment operator assigns the contents of one object to another existing object, making a copy of the data.
+    Mechanism:
+        It typically involves copying all the members from the source object to the destination object.
+        For classes with dynamic resources (like heap memory), a deep copy might be performed, meaning that new memory is allocated, and the content is copied.
+    Result: Both the original and the copied object are independent of each other.
+    Example:
+
+    cpp
+
+    MyClass obj1;
+    MyClass obj2;
+    obj2 = obj1;  // Copy assignment: obj2 gets a copy of obj1's data
+
+Move Assignment (operator=)
+
+    Purpose: The move assignment operator transfers ownership of resources from one object (typically a temporary one) to another, leaving the source object in a valid but unspecified state.
+    Mechanism:
+        Instead of copying the data, it "moves" the resources (like pointers) from the source object to the destination object.
+        The source object is typically left in a state where it no longer owns those resources, but it is still in a valid state (e.g., its pointers might be set to nullptr).
+    Result: The destination object takes over the resources of the source object, which is left in an empty or default state.
+    Example:
+
+    cpp
+
+    MyClass obj1;
+    MyClass obj2;
+    obj2 = std::move(obj1);  // Move assignment: obj2 takes over obj1's resources
+
+Key Differences
+
+    Copy Assignment: Duplicates the contents; both objects remain independent.
+    Move Assignment: Transfers ownership of resources; the source object is left in a valid but unspecified state, and only the destination object owns the resources.
+
+Summary
+
+    Use copy assignment when you need a duplicate of the object with independent resources.
+    Use move assignment when you want to transfer resources efficiently from one object to another, especially when dealing with temporary objects or large resources.

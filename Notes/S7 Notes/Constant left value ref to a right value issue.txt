@@ -1,0 +1,23 @@
+A const lvalue reference in C++ can bind to an rvalue (a temporary value), which is a special exception in the language. Here's a brief explanation:
+Key Points
+
+    Binding to Rvalues:
+        Normally, lvalue references require an lvalue (a value with a specific memory location) to bind to.
+        However, a const lvalue reference can also bind to an rvalue (a temporary value), like a literal or the result of an expression.
+        Example:
+
+        cpp
+
+        const int &ref = 10;  // `ref` binds to the temporary rvalue `10`
+
+    Lifetime Extension:
+        When an rvalue is bound to a const lvalue reference, the lifetime of that rvalue is extended to match the lifetime of the reference.
+        This makes it safe to use the temporary value throughout the scope of the reference.
+
+    Read-Only Access:
+        Since the reference is const, the rvalue cannot be modified through the reference.
+        This ensures the immutability of the temporary value, which aligns with its transient nature.
+
+Summary
+
+A const lvalue reference can bind to an rvalue, allowing you to safely reference a temporary value without copying it. The reference provides read-only access, and the lifetime of the rvalue is extended to match that of the reference.

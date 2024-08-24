@@ -1,0 +1,65 @@
+dynamic_cast in C++ is used for safely casting pointers or references to base class types into pointers or references to derived class types. It’s primarily used in the context of polymorphism to ensure that the cast is valid at runtime.
+Key Points about dynamic_cast:
+
+    Safe Downcasting:
+        dynamic_cast is most commonly used for downcasting, which is casting a pointer or reference of a base class to a pointer or reference of a derived class.
+        It checks at runtime whether the object pointed to by the base class pointer/reference actually belongs to the derived class.
+
+    Requires a Polymorphic Base Class:
+        The base class must have at least one virtual function. This is necessary because dynamic_cast relies on the presence of runtime type information (RTTI), which is generated for classes with virtual functions.
+
+    Return Values:
+        If the cast is successful, dynamic_cast returns a pointer or reference of the derived type.
+        If the cast fails (i.e., the object isn’t of the derived type), it returns nullptr when casting pointers, or throws a std::bad_cast exception when casting references.
+
+Example:
+
+cpp
+
+#include <iostream>
+#include <typeinfo>
+
+class Base {
+public:
+    virtual void show() {
+        std::cout << "Base class" << std::endl;
+    }
+};
+
+class Derived : public Base {
+public:
+    void show() override {
+        std::cout << "Derived class" << std::endl;
+    }
+
+    void specificFunction() {
+        std::cout << "Specific function in Derived" << std::endl;
+    }
+};
+
+int main() {
+    Base* basePtr = new Derived;
+
+    // Use dynamic_cast to safely downcast
+    Derived* derivedPtr = dynamic_cast<Derived*>(basePtr);
+
+    if (derivedPtr) {
+        derivedPtr->specificFunction();  // Safe to call specificFunction()
+    } else {
+        std::cout << "Cast failed!" << std::endl;
+    }
+
+    delete basePtr;
+    return 0;
+}
+
+Explanation:
+
+    Polymorphic Base Class: Base is a polymorphic class because it has a virtual function show().
+    Downcasting: We attempt to downcast basePtr (a Base*) to a Derived* using dynamic_cast.
+    Check for Success: If the cast is successful, derivedPtr will be non-null, and we can safely call Derived specific functions like specificFunction(). If it fails, derivedPtr will be nullptr.
+
+Summary:
+
+    dynamic_cast is used for runtime-checked casting, ensuring that a pointer/reference to a base class can be safely cast to a pointer/reference to a derived class.
+    It is useful in situations where you need to ensure that the object being cast is actually of the derived type before performing operations specific to that type.

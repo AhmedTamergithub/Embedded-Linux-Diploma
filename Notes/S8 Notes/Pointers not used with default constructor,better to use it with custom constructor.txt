@@ -1,0 +1,29 @@
+Pointers and Defaulted Constructors:
+
+    If you're using the = default; keyword to instruct the compiler to generate a default constructor, the compiler will not automatically manage pointers (e.g., it won’t allocate or deallocate memory for pointers).
+    The pointer members in the class will remain uninitialized unless explicitly initialized in the member initializer list or within the constructor.
+
+Example:
+
+cpp
+
+class MyClass {
+private:
+    int* ptr;
+
+public:
+    // Default constructor using = default
+    MyClass() = default;  // Pointer ptr remains uninitialized (could be a dangling pointer)
+
+    // If you need to manage the pointer, you'd need to write the constructor yourself
+    MyClass() : ptr(new int(42)) {}  // Initialize the pointer
+};
+
+3. When Not to Use Pointers in Default Constructors:
+
+    Uninitialized Pointers: If a pointer is not initialized in a default constructor, it could lead to undefined behavior if it’s later dereferenced without being assigned a valid memory address.
+    Memory Management: If you dynamically allocate memory in a default constructor, you must ensure proper deallocation (e.g., in a destructor) to avoid memory leaks.
+
+Summary:
+
+Pointers can be used in default constructors, but it's essential to initialize them appropriately to avoid issues like undefined behavior or memory leaks. When using the = default; keyword, the compiler doesn't handle pointer initialization, so you must manage pointers explicitly.

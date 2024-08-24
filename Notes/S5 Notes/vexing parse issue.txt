@@ -1,0 +1,19 @@
+Vexing Parse:
+
+
+
+The vexing parse in C++ is an ambiguity where code that looks like it should create an object is mistakenly interpreted by the compiler as a function declaration instead. This can lead to confusing and unintended behavior.
+Example:
+
+cpp code:
+MyClass obj(MyOtherClass());
+
+This looks like it should create an obj of type MyClass, but the compiler sees it as a declaration of a function obj that takes a function returning MyOtherClass as an argument and returns a MyClass.
+How to Avoid:
+
+    Use brace initialization: MyClass obj{MyOtherClass()};
+    Add extra parentheses: MyClass obj((MyOtherClass()));
+
+Summary:
+
+The vexing parse is a tricky C++ syntax issue where object initialization can be misinterpreted as a function declaration.
