@@ -1,4 +1,4 @@
-n C++ polymorphism, a virtual table (vtable) is a mechanism used to support dynamic (or runtime) polymorphism, especially in the context of inheritance.
+In C++ polymorphism, a virtual table (vtable) is a mechanism used to support dynamic (or runtime) polymorphism, especially in the context of inheritance.
 Key Concepts:
 
     Virtual Table (vtable):
