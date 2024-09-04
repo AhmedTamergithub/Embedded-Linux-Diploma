@@ -1,0 +1,90 @@
+std::getline is a function in C++ used to read an entire line of text from an input stream, such as std::cin or a file, into a string. It is particularly useful when you want to capture input that may contain spaces, as it reads until it encounters a newline character (\n) by default, rather than stopping at the first whitespace (which is the default behavior of >> operator).
+Basic Syntax:
+
+cpp
+
+std::getline(input_stream, string_variable, delimiter);
+
+    input_stream: The source from which you want to read the input. This can be std::cin, a std::ifstream (for reading from files), or a std::istringstream.
+
+    string_variable: The std::string variable where the line of text will be stored.
+
+    delimiter (optional): A character that specifies where to stop reading. By default, it’s the newline character (\n), but you can specify a different character.
+
+Examples of Using std::getline:
+1. Reading a Line from Standard Input (std::cin):
+
+cpp
+
+#include <iostream>
+#include <string>
+
+int main() {
+    std::string line;
+    std::cout << "Enter a line of text: ";
+    std::getline(std::cin, line);  // Reads the entire line including spaces
+    std::cout << "You entered: " << line << std::endl;
+    return 0;
+}
+
+    Behavior: This code reads an entire line from the user input (including spaces) and stores it in the line variable.
+
+2. Reading from a File:
+
+cpp
+
+#include <iostream>
+#include <fstream>
+#include <string>
+
+int main() {
+    std::ifstream file("example.txt");
+    std::string line;
+    
+    if (file.is_open()) {
+        while (std::getline(file, line)) {
+            std::cout << line << std::endl;  // Print each line from the file
+        }
+        file.close();
+    } else {
+        std::cerr << "Unable to open file";
+    }
+
+    return 0;
+}
+
+    Behavior: This code reads each line from a file named example.txt and prints it out until the end of the file is reached.
+
+3. Using a Custom Delimiter:
+
+cpp
+
+#include <iostream>
+#include <sstream>
+#include <string>
+
+int main() {
+    std::string data = "apple,orange,banana,grape";
+    std::stringstream ss(data);
+    std::string fruit;
+
+    while (std::getline(ss, fruit, ',')) {  // Use comma as the delimiter
+        std::cout << fruit << std::endl;
+    }
+
+    return 0;
+}
+
+    Behavior: This code reads data until it encounters a comma, and then stores each fruit name into the fruit variable, which is then printed.
+
+Key Points:
+
+    Handles Spaces: Unlike the >> operator, std::getline does not stop reading at spaces, making it ideal for inputs that include multiple words.
+
+    Custom Delimiters: You can specify a custom delimiter, making std::getline flexible for different input formats.
+
+    Returns the Stream: std::getline returns the stream it reads from, allowing you to check for successful input or detect end-of-file (EOF) conditions in file processing.
+
+Conclusion:
+
+std::getline is a versatile function in C++ used to read entire lines of text from an input stream into a string, handling cases where the input may include spaces or specific delimiters. It is especially useful for reading user input, processing text files, or handling data with complex formatting.
