@@ -1,0 +1,69 @@
+In C++, the terms size and capacity refer to different concepts when dealing with containers like std::vector, std::deque, or std::string.
+1. size():
+
+    Definition: The size() function returns the number of elements currently stored in the container.
+    What it means: It tells you how many elements are in the container at a given time.
+    Time Complexity: Typically constant time O(1) for most containers.
+
+Example:
+
+cpp
+
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> vec = {1, 2, 3, 4, 5};
+    std::cout << "Size: " << vec.size() << std::endl; // Output: 5
+    return 0;
+}
+
+In the example above, the size of vec is 5 because there are 5 elements in the vector.
+2. capacity():
+
+    Definition: The capacity() function returns the number of elements the container can hold before it needs to allocate more memory.
+    What it means: It tells you the total available storage in the container, which may be larger than the number of elements currently stored.
+    Why it matters: When a container grows beyond its capacity, it typically allocates new memory (often doubling its capacity), copies existing elements to the new space, and frees the old memory. This process can be expensive in terms of time.
+    Time Complexity: Typically constant time O(1).
+
+Example:
+
+cpp
+
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> vec;
+    
+    vec.reserve(10); // Reserve space for 10 elements
+    std::cout << "Capacity after reserve: " << vec.capacity() << std::endl; // Output: 10
+    
+    vec.push_back(1); // Add one element
+    std::cout << "Size: " << vec.size() << std::endl;        // Output: 1
+    std::cout << "Capacity: " << vec.capacity() << std::endl; // Output: 10
+    
+    return 0;
+}
+
+In the example above, the capacity is 10, but the size is only 1 because we've only inserted one element.
+Key Differences:
+
+    Purpose:
+        Size: The number of elements currently in the container.
+        Capacity: The total number of elements the container can hold before needing to allocate more memory.
+
+    Dynamic Containers: Containers like std::vector or std::string dynamically adjust their capacity as elements are added, but their size only increases when new elements are explicitly added.
+
+    Memory Allocation:
+        Size does not affect memory allocation directly.
+        Capacity determines when a new allocation will occur (i.e., when the size exceeds the current capacity).
+
+    Growth Strategy: For containers like std::vector, the capacity typically grows exponentially (e.g., by doubling) to reduce the number of memory reallocations as the size increases.
+
+Summary:
+
+    size(): Number of elements currently stored in the container.
+    capacity(): The total number of elements that the container can store without requiring memory reallocation.
+
+Both of these concepts are important for understanding the performance of dynamic containers in C++ when managing memory and efficiency.
