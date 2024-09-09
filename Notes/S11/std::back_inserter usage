@@ -1,0 +1,43 @@
+
+
+
+MAIN USAGE: NO NEED FOR SIZING THE CONTAINER MANUALLY
+
+
+
+
+
+
+
+
+
+std::back_inserter is a function in C++ that creates a special iterator, called a back-insert iterator, which allows elements to be added to the back (or end) of a container like a vector, list, or deque. It is part of the <iterator> header. When you use std::back_inserter, it calls the container's push_back method to append elements, instead of overwriting them like a normal iterator would.
+Example Usage:
+
+cpp
+
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <iterator>  // Required for std::back_inserter
+
+int main() {
+    std::vector<int> source = {1, 2, 3, 4, 5};
+    std::vector<int> destination;
+
+    // Copying elements from source to destination using std::back_inserter
+    std::copy(source.begin(), source.end(), std::back_inserter(destination));
+
+    // Display the copied elements
+    for (int num : destination) {
+        std::cout << num << " ";
+    }
+
+    return 0;
+}
+
+Output:
+
+1 2 3 4 5
+
+In this example, std::back_inserter(destination) creates an iterator that appends elements to destination using push_back. This is especially useful when you want to avoid resizing the container manually or overwriting existing elements.
