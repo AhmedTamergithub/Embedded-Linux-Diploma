@@ -3,10 +3,10 @@
 #include <cstring>
 class String
 {
-private:
+public:
     char*str;
     int size;
-public:
+
 String():str(nullptr),size(0){
 
 }
@@ -64,6 +64,18 @@ String& operator=(String&& expired)
     }
     return *this;
 }
+//+ Operator that adds 2 strings
+String operator+(const String &temp ){
+    String add;
+   // std::cout<<"2 classes addition"<<std::endl;
+   add.size = this->size + temp.size ; // Adjust size
+    add.str = new char[add.size];
+ 
+   strcat(this->str,temp.str);
+   strcpy(add.str,this->str);
+   return add;
+   
+}
 
 ~String ()
 {    std::cout<<"Destructor"<<std::endl;
@@ -88,5 +100,11 @@ String t4(array2);
 String t5(std::move(t4));
 String t6;
 t6=std::move(t5);
-
+char array3[]="Ahmed";
+char array4[]="Tamer";
+String t7(array3);
+String t8(array4);
+String t9;
+t9=t7+t8;
+std::cout<<t9.str<<std::endl;
 }
